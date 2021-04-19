@@ -18,11 +18,15 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.xiaoqiangzzz.deal_box.R;
 
+import java.util.ArrayList;
+
 public class DashboardFragment extends Fragment {
 
     private DashboardViewModel dashboardViewModel;
 
     private RecyclerView.LayoutManager chatListLayoutManager;
+
+    private RecyclerView.Adapter chatListAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -33,6 +37,19 @@ public class DashboardFragment extends Fragment {
         chatListView.setHasFixedSize(true);
         chatListLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         chatListView.setLayoutManager(chatListLayoutManager);
+
+        this.chatListAdapter = new ChatListAdapter(getData());
+        chatListView.setAdapter(this.chatListAdapter);
         return view;
+    }
+
+    private ArrayList<String> getData() {
+        ArrayList<String> data = new ArrayList<>();
+        String temp = " friend";
+        for(int i = 0; i < 20; i++) {
+            data.add(i + temp);
+        }
+
+        return data;
     }
 }
