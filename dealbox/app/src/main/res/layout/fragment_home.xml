@@ -17,5 +17,26 @@
             android:scrollbars="vertical" />
     </LinearLayout>
 
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Main content -->
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/issue_goods_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="66dp"
+        android:layout_marginRight="16dp"
+        android:contentDescription="发布"
+        android:background="@drawable/fab"
+        app:srcCompat="@drawable/add"
+        tools:ignore="VectorDrawableCompat"
+        android:layout_marginEnd="16dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

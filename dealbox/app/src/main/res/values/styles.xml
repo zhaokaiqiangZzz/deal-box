@@ -8,4 +8,35 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="UsernameTextStyle" parent="android:Theme.Light">
+        <item name="android:textColor">@color/dark</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="text">
+        <item name="android:textColor">@color/dark</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="second_title">
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/dark</item>
+    </style>
+    <style name="first_title">
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">@color/dark</item>
+    </style>
+
+    <style name="my_deal_image">
+        <item name="android:layout_height">70dp</item>
+        <item name="android:padding">15dp</item>
+    </style>
+
+    <style name="recommendText">
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">5dp</item>
+    </style>
+
 </resources>

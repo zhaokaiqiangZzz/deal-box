@@ -1,11 +1,17 @@
 package com.xiaoqiangzzz.deal_box.ui.home;
 
+import android.graphics.drawable.Drawable;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.xiaoqiangzzz.deal_box.R;
+import com.xiaoqiangzzz.deal_box.ui.dashboard.ChatListAdapter;
 
 import java.util.ArrayList;
 
@@ -17,6 +23,17 @@ public class GoodsListAdapter extends RecyclerView.Adapter<GoodsListAdapter.View
      * 展示数据
      */
     private ArrayList<String> mData;
+
+    private GoodsListAdapter.OnItemClickListener mOnItemClickListener;
+
+    public void setOnItemClickListener(GoodsListAdapter.OnItemClickListener mOnItemClickListener){
+        this.mOnItemClickListener = mOnItemClickListener;
+    }
+
+    //设置回调接口
+    public interface OnItemClickListener{
+        void onItemClick(View view, int position);
+    }
 
     public GoodsListAdapter(ArrayList<String> data) {
         this.mData = data;
@@ -48,9 +65,19 @@ public class GoodsListAdapter extends RecyclerView.Adapter<GoodsListAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(GoodsListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(GoodsListAdapter.ViewHolder holder, final int position) {
         // 绑定数据
-        holder.mTv.setText(mData.get(position));
+        //holder.mTv.setText(mData.get(position));
+        holder.imageView.setImageResource(R.drawable.goods2);
+        //通过为条目设置点击事件触发回调
+        if (mOnItemClickListener != null) {
+            holder.itemLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mOnItemClickListener.onItemClick(view, position);
+                }
+            });
+        }
     }
 
     @Override
@@ -59,12 +86,15 @@ public class GoodsListAdapter extends RecyclerView.Adapter<GoodsListAdapter.View
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-
+        LinearLayout itemLayout;
         TextView mTv;
+        ImageView imageView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             mTv = (TextView) itemView.findViewById(R.id.goods_name);
+            itemLayout = (LinearLayout) itemView.findViewById(R.id.goods_card);
+            imageView = itemView.findViewById(R.id.item_goods_image);
         }
     }
 }

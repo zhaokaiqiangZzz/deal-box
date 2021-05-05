@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="285dp"
+    android:id="@+id/goods_card"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_gravity="center_vertical"
@@ -24,6 +25,7 @@
 
             <!-- Media -->
             <ImageView
+                android:id="@+id/item_goods_image"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 app:srcCompat="@drawable/goods1"
@@ -40,11 +42,10 @@
                 <!-- Title, secondary and supporting text -->
                 <TextView
                     android:id="@+id/goods_name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="72dp"
                     android:layout_height="wrap_content"
                     android:text="商品标题"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    />
+                    android:textAppearance="?attr/textAppearanceHeadline6" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
