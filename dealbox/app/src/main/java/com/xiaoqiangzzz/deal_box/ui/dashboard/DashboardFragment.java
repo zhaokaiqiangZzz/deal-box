@@ -37,6 +37,7 @@ public class DashboardFragment extends Fragment {
         dashboardViewModel =
                 ViewModelProviders.of(this).get(DashboardViewModel.class);
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
+
         RecyclerView chatListView = view.findViewById(R.id.chat_list);
         chatListView.setHasFixedSize(true);
         chatListLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);

@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="245dp"
-    android:id="@+id/goods_card"
+    android:layout_height="wrap_content"
+    android:id="@+id/goods_image_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_gravity="center_vertical"
     android:gravity="center_vertical"
-    android:orientation="vertical"
-    android:padding="@dimen/margin">
+    android:orientation="vertical">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card"
@@ -25,38 +24,13 @@
 
             <!-- Media -->
             <ImageView
-                android:id="@+id/item_goods_image"
+                android:id="@+id/goods_image"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 app:srcCompat="@drawable/goods2"
                 android:scaleType="centerCrop"
                 android:contentDescription="商品图片"
                 />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="4dp">
-
-                <!-- Title, secondary and supporting text -->
-                <TextView
-                    android:id="@+id/goods_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="商品标题"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="商品价格"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary"
-                    />
-
-            </LinearLayout>
 
         </LinearLayout>
 

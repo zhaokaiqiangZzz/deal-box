@@ -1,19 +1,237 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/padding_side_size"
+    android:paddingRight="@dimen/padding_side_size">
 
-    <TextView
-        android:id="@+id/text_notifications"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/padding_bottom_size"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/head_image"
+            android:background="@color/light"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:id="@+id/friend_name"
+                style="@style/UsernameTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/person_image"
+                android:gravity="center_vertical"
+                android:text="有马公生" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/person_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/head_image2"
+                app:civ_border_color="@color/light"
+                app:civ_border_width="2dp" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/light"
+            android:orientation="vertical">
+            <TextView
+                style="@style/second_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的交易" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/my_issued"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/my_issued_image"
+                        style="@style/my_deal_image"
+                        android:layout_width="match_parent"
+                        android:src="@drawable/buy_fill" />
+
+                    <TextView
+                        style="@style/recommendText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/my_issued_image"
+                        android:text="我发布的" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/my_sold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/my_sold_image"
+                        style="@style/my_deal_image"
+                        android:layout_width="match_parent"
+                        android:src="@drawable/renminbi" />
+
+                    <TextView
+                        style="@style/recommendText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/my_sold_image"
+                        android:text="我卖出的" />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/my_bought"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/my_bought_image"
+                        style="@style/my_deal_image"
+                        android:layout_width="match_parent"
+                        android:src="@drawable/format" />
+
+                    <TextView
+                        style="@style/recommendText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/my_bought_image"
+                        android:text="我买到的" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/light"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <TextView
+                style="@style/text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="手机号"/>
+
+            <LinearLayout
+                android:id="@+id/nameContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right">
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="24dp"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+                    android:gravity="center_horizontal|top" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/light"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <TextView
+                style="@style/text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="用户名" />
+
+            <LinearLayout
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right">
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="24dp"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+                    android:gravity="center_horizontal|top" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/light"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <TextView
+                style="@style/text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="密码" />
+
+            <LinearLayout
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right">
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="24dp"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+                    android:gravity="center_horizontal|top" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/design_default_color_error"
+                android:text="退出登录"
+                android:textColor="@color/light"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

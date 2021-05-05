@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal">
+
+<!--    因为父View为ListView,需要再套一层LinerLayout已设置item宽度-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/message_item_size"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/person_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/head_image"
+            android:layout_alignParentLeft="true"
+            app:civ_border_color="@color/light"
+            app:civ_border_width="2dp" />
+
+        <TextView
+            android:id="@+id/tvname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:padding="12dp"
+            android:background="@drawable/other_chat_background"
+            android:text="我是宫园薰"
+            android:textColor="#000000"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+</LinearLayout>
