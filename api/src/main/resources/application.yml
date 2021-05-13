@@ -1,0 +1,56 @@
+spring:
+  profiles:
+    # demo: 演示环境，内置数据库；pro 生产环境，mysql数据库
+    active: ${active:pro}
+  # hibernate 数据库 验证级别
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: ${show-sql:false}
+    # 在同一请求中使用同一个EntityManager
+    # https://stackoverflow.com/questions/30549489/what-is-this-spring-jpa-open-in-view-true-property-in-spring-boot
+  #    open-in-view: false
+
+  # 启用 flyway
+  flyway:
+    enabled: false
+
+  # 上传文件大小限制
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 20MB
+      max-request-size: 20MB
+
+server:
+  # 配置端口
+  port: ${port:8002}
+  servlet:
+    session:
+      timeout: 60m
+
+---
+spring:
+  config:
+    activate:
+      on-profile: pro
+  # 配置数据源
+  datasource:
+    url: jdbc:mysql://${datasource.url:127.0.0.1}:${datasource.port:3307}/${datasource.dbname:deal-box}?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf-8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Shanghai
+    username: ${datasource.username:root}
+    password: ${datasource.password:}
+
+---
+spring:
+  config:
+    activate:
+      on-profile: demo
+  jpa:
+    hibernate:
+      ddl-auto: update
+  flyway:
+    enabled: false
+  # H2数据源,请在当前用户所有文件夹下建立data文件夹，并保证其可写
+  # 或者自行指定其它文件位置
+  datasource:
+    url: jdbc:h2:~/data/db
