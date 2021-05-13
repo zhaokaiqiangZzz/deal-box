@@ -1,15 +1,20 @@
 package com.xiaoqiangzzz.deal_box.entity;
 
-import com.xiaoqiangzzz.deal_box.ui.goods.Goods;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
     private Long id;
-    private List<Goods> goods;
-    private List<Chat> chats;
+    private List<Goods> goods = new ArrayList<>();
+    private List<Chat> chats = new ArrayList<>();
     private String username;
     private String password;
+    private String petName;
+
+    public User(){
+
+    }
 
     public Long getId() {
         return id;
@@ -25,6 +30,14 @@ public class User {
 
     public void setGoods(List<Goods> goods) {
         this.goods = goods;
+    }
+
+    public List<Chat> getChats() {
+        return chats;
+    }
+
+    public void setChats(List<Chat> chats) {
+        this.chats = chats;
     }
 
     public String getUsername() {
@@ -43,11 +56,11 @@ public class User {
         this.password = password;
     }
 
-    public List<Chat> getChats() {
-        return chats;
+    public String getPetName() {
+        return petName;
     }
 
-    public void setChats(List<Chat> chats) {
-        this.chats = chats;
+    public void setPetName(String petName) {
+        this.petName = petName;
     }
 }

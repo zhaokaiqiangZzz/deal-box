@@ -5,11 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.xiaoqiangzzz.deal_box.MainActivity;
 import com.xiaoqiangzzz.deal_box.R;
-import com.xiaoqiangzzz.deal_box.ui.auth.Login;
 import com.xiaoqiangzzz.deal_box.ui.chat.Chat;
-import com.xiaoqiangzzz.deal_box.ui.dashboard.DashboardFragment;
 
 import java.util.ArrayList;
 

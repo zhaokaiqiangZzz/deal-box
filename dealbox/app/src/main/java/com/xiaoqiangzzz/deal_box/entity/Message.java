@@ -6,10 +6,6 @@ public class Message {
      */
     private Long id;
     /**
-     * 所属聊天
-     */
-    private Chat chat;
-    /**
      * 聊天内容
      */
     private String chatMessage;
@@ -25,14 +21,6 @@ public class Message {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Chat getChat() {
-        return chat;
-    }
-
-    public void setChat(Chat chat) {
-        this.chat = chat;
     }
 
     public String getChatMessage() {

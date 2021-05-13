@@ -2,7 +2,7 @@ package com.xiaoqiangzzz.deal_box.entity;
 
 import java.util.List;
 
-public class goods {
+public class Goods {
     private Long id;
 
     public Long getId() {
