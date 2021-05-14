@@ -17,7 +17,7 @@
             android:label="@string/app_name">
         </activity>
         <activity
-            android:name="com.xiaoqiangzzz.deal_box.ui.auth.Login"
+            android:name="com.xiaoqiangzzz.deal_box.ui.auth.LoginActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,7 +30,7 @@
             android:label="@string/app_name">
         </activity>
         <activity
-            android:name="com.xiaoqiangzzz.deal_box.ui.goods.Goods"
+            android:name="com.xiaoqiangzzz.deal_box.ui.goods.GoodsActivity"
             android:label="@string/app_name">
         </activity>
         <activity

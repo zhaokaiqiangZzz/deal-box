@@ -1,18 +1,14 @@
 package com.xiaoqiangzzz.deal_box.ui.goods_list;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.xiaoqiangzzz.deal_box.MainActivity;
 import com.xiaoqiangzzz.deal_box.R;
 import com.xiaoqiangzzz.deal_box.entity.GoodsType;
-import com.xiaoqiangzzz.deal_box.ui.goods.Goods;
+import com.xiaoqiangzzz.deal_box.ui.goods.GoodsActivity;
 import com.xiaoqiangzzz.deal_box.ui.home.GoodsListAdapter;
-import com.xiaoqiangzzz.deal_box.ui.home.HomeFragment;
 
 import java.util.ArrayList;
 
@@ -58,7 +54,7 @@ public class GoodsListActivity extends AppCompatActivity {
             public void onItemClick(View view, int position) {
 //                Toast.makeText(DashboardFragment.this.getContext(),"这是条目"
 //                        +DashboardFragment.this.chatListData.get(position),Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(GoodsListActivity.this, Goods.class);
+                Intent intent = new Intent(GoodsListActivity.this, GoodsActivity.class);
                 intent.putExtra("id", GoodsListActivity.this.goodsListData.get(position));
                 startActivity(intent);
             }

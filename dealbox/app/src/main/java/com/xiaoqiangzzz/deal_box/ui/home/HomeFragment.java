@@ -1,15 +1,12 @@
 package com.xiaoqiangzzz.deal_box.ui.home;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.OrientationHelper;
@@ -17,11 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.xiaoqiangzzz.deal_box.MainActivity;
 import com.xiaoqiangzzz.deal_box.R;
-import com.xiaoqiangzzz.deal_box.ui.auth.Login;
-import com.xiaoqiangzzz.deal_box.ui.dashboard.ChatListAdapter;
-import com.xiaoqiangzzz.deal_box.ui.goods.Goods;
+import com.xiaoqiangzzz.deal_box.ui.goods.GoodsActivity;
 import com.xiaoqiangzzz.deal_box.ui.issue_goods.IssueGoodsActivity;
 
 import java.util.ArrayList;
@@ -62,7 +56,7 @@ public class HomeFragment extends Fragment {
             public void onItemClick(View view, int position) {
 //                Toast.makeText(DashboardFragment.this.getContext(),"这是条目"
 //                        +DashboardFragment.this.chatListData.get(position),Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getActivity(), Goods.class);
+                Intent intent = new Intent(getActivity(), GoodsActivity.class);
                 intent.putExtra("id", HomeFragment.this.goodsListData.get(position));
                 startActivity(intent);
             }

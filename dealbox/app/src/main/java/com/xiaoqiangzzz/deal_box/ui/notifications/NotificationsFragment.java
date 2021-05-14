@@ -5,22 +5,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.xiaoqiangzzz.deal_box.MainActivity;
 import com.xiaoqiangzzz.deal_box.R;
 import com.xiaoqiangzzz.deal_box.entity.GoodsType;
-import com.xiaoqiangzzz.deal_box.ui.auth.Login;
 import com.xiaoqiangzzz.deal_box.ui.goods_list.GoodsListActivity;
-import com.xiaoqiangzzz.deal_box.ui.home.HomeFragment;
 
 public class NotificationsFragment extends Fragment {
 

@@ -5,11 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.xiaoqiangzzz.deal_box.MainActivity;
 import com.xiaoqiangzzz.deal_box.R;
-import com.xiaoqiangzzz.deal_box.ui.auth.Login;
 import com.xiaoqiangzzz.deal_box.ui.chat.Chat;
-import com.xiaoqiangzzz.deal_box.ui.dashboard.DashboardFragment;
 
 import java.util.ArrayList;
 
@@ -17,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class Goods extends AppCompatActivity {
+public class GoodsActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager chatListLayoutManager;
 
     private RecyclerView.Adapter goodsImageListAdapter;
@@ -41,7 +38,7 @@ public class Goods extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 // 给bnt1添加点击响应事件
-                Intent intent =new Intent(Goods.this, Chat.class);
+                Intent intent =new Intent(GoodsActivity.this, Chat.class);
                 intent.putExtra("id", id);
                 //启动
                 startActivity(intent);
