@@ -2,6 +2,7 @@ package com.xiaoqiangzzz.deal_box.ui.issue_goods;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xiaoqiangzzz.deal_box.R;
+import com.xiaoqiangzzz.deal_box.service.BaseHttpService;
+import com.xiaoqiangzzz.deal_box.service.DownloadImageTask;
 
 import java.util.ArrayList;
 
@@ -74,6 +77,10 @@ public class IssueGoodsImageListAdapter extends RecyclerView.Adapter<IssueGoodsI
     @Override
     public void onBindViewHolder(IssueGoodsImageListAdapter.ViewHolder holder, final int position) {
         // 绑定数据
+        if (mData.get(position) != null && !mData.get(position).equals("")) {
+            String urlString = BaseHttpService.BASE_URL + mData.get(position);
+            holder.imageView.setImageURI(Uri.parse(urlString));
+        }
         //holder.mTv.setText(mData.get(position));
         if (position != this.mData.size() - 1) {
             holder.imageView.setImageResource(R.drawable.goods2);
@@ -110,7 +117,6 @@ public class IssueGoodsImageListAdapter extends RecyclerView.Adapter<IssueGoodsI
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         LinearLayout itemLayout;
-        TextView mTv;
         ImageView imageView;
 
         public ViewHolder(View itemView) {
