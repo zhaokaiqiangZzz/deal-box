@@ -36,7 +36,7 @@ spring:
       on-profile: pro
   # 配置数据源
   datasource:
-    url: jdbc:mysql://${datasource.url:127.0.0.1}:${datasource.port:3307}/${datasource.dbname:deal-box}?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf-8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://${datasource.url:127.0.0.1}:${datasource.port:3306}/${datasource.dbname:deal-box}?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf-8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Shanghai
     username: ${datasource.username:root}
     password: ${datasource.password:}
 

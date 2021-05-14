@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class Goods extends AppCompatActivity {
+public class GoodsActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager chatListLayoutManager;
 
     private RecyclerView.Adapter goodsImageListAdapter;
@@ -38,7 +38,7 @@ public class Goods extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 // 给bnt1添加点击响应事件
-                Intent intent =new Intent(Goods.this, Chat.class);
+                Intent intent =new Intent(GoodsActivity.this, Chat.class);
                 intent.putExtra("id", id);
                 //启动
                 startActivity(intent);

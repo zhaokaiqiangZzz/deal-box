@@ -27,6 +27,6 @@ public class UserService {
      * @param user
      */
     public void login(BaseHttpService.CallBack callBack, User user) {
-        httpService.post(LOCAL_URL + "user/login", user, callBack, User.class);
+        httpService.post("user/login", user, callBack, User.class);
     }
 }

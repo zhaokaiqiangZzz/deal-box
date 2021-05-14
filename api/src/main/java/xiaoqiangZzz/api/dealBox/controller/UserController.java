@@ -42,6 +42,11 @@ public class UserController {
     return this.userService.checkPasswordIsRight(user.getPassword());
   }
 
+  @GetMapping("test")
+  public String test() {
+    return "success";
+  }
+
   /**
    * 更新密码接口.
    * @param user user

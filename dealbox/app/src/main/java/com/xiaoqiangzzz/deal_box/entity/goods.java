@@ -1,5 +1,6 @@
 package com.xiaoqiangzzz.deal_box.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Goods {
@@ -63,7 +64,7 @@ public class Goods {
 
     private String name;
     private String description;
-    private List<Attachment> attachments;
+    private List<Attachment> attachments = new ArrayList<>();
     private User createUser;
     private User buyUser;
     private Integer status;

@@ -16,6 +16,10 @@ import android.widget.LinearLayout;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.xiaoqiangzzz.deal_box.R;
+import com.xiaoqiangzzz.deal_box.entity.Attachment;
+import com.xiaoqiangzzz.deal_box.entity.Goods;
+import com.xiaoqiangzzz.deal_box.service.BaseHttpService;
+import com.xiaoqiangzzz.deal_box.service.GoodsService;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -35,6 +39,8 @@ public class IssueGoodsActivity extends Activity {
     private StaggeredGridLayoutManager staggeredGridLayoutManager;
 
     private RecyclerView.Adapter issueGoodsImageList;
+    private GoodsService goodsService = GoodsService.getInstance();
+    private Goods goods = new Goods();
 
     private static final int WRITE_EXTERNAL_STORAGE_CODE = 0;
     private static final int ImageCode = 1;
@@ -57,7 +63,7 @@ public class IssueGoodsActivity extends Activity {
         this.staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, OrientationHelper.VERTICAL);
         goodsListView.setLayoutManager(staggeredGridLayoutManager);
         // 设置adapter
-        this.issueGoodsImageListData = getData();
+        this.issueGoodsImageListData = getData(this.goods);
         issueGoodsImageList = new IssueGoodsImageListAdapter(this.issueGoodsImageListData);
         ((IssueGoodsImageListAdapter) this.issueGoodsImageList).setOnItemClickListener(new IssueGoodsImageListAdapter.OnItemClickListener() {
 
@@ -98,13 +104,11 @@ public class IssueGoodsActivity extends Activity {
         goodsListView.setAdapter(this.issueGoodsImageList);
     }
 
-    private ArrayList<String> getData() {
+    private ArrayList<String> getData(Goods goods) {
         ArrayList<String> data = new ArrayList<>();
-        String temp = "goods";
-        for(int i = 0; i < 5; i++) {
-            data.add(i + temp);
+        for (Attachment attachment : goods.getAttachments()) {
+            data.add(attachment.getUrl());
         }
-
         return data;
     }
 
@@ -151,14 +155,13 @@ public class IssueGoodsActivity extends Activity {
                              MediaType MEDIA_TYPE_PNG = MediaType.parse("image/*");
                             final RequestBody req = new MultipartBody.Builder().setType(MultipartBody.FORM).addFormDataPart("file", file.getName(), RequestBody.create(MEDIA_TYPE_PNG, file))
                                     .build();
-//                            userService.uploadImage(req, new BaseHttpService.CallBack() {
-//                                @Override
-//                                public void onSuccess(BaseHttpService.HttpTask.CustomerResponse result) {
-//                                    user.setImageUrl((String) result.getData());
-//                                    updateMessage(user);
-//                                    userService.currentUser.onNext(user);
-//                                }
-//                            });
+                            goodsService.uploadImage(req, new BaseHttpService.CallBack() {
+                                @Override
+                                public void onSuccess(BaseHttpService.HttpTask.CustomerResponse result) {
+                                    goods.getAttachments().add((Attachment) result.getData());
+                                    updateImage(goods);
+                                }
+                            });
 
 
                         }
@@ -179,5 +182,9 @@ public class IssueGoodsActivity extends Activity {
         String imagePath = cursor.getString(column_index);
 
         return imagePath;
+    }
+
+    public void updateImage(Goods goods) {
+        ((IssueGoodsImageListAdapter) this.issueGoodsImageList).updateData(this.getData(goods));
     }
 }

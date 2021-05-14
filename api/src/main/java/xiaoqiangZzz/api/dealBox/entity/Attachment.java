@@ -1,71 +1,30 @@
 package xiaoqiangZzz.api.dealBox.entity;
 
-import com.fasterxml.jackson.annotation.JsonView;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-import javax.persistence.*;
-
-/**
- * 附件实体.
- */
 @Entity
-public class Attachment extends BaseEntity {
-  /** 附件原始名称 */
-  private String originName;
+public class Attachment {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String url;
 
-  @ManyToOne
-  @JoinColumn(nullable = false)
-  @JsonView(FileJsonView.class)
-  private File file;
+    public Long getId() {
+        return id;
+    }
 
-  /** 附件扩展名 */
-  private String ext;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  public Attachment() {
-  }
+    public String getUrl() {
+        return url;
+    }
 
-  public Attachment(Long id) {
-    this.id = id;
-  }
-
-  @Override
-  public Long getId() {
-    return id;
-  }
-
-  @Override
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public String getOriginName() {
-    return originName;
-  }
-
-  public void setOriginName(String originName) {
-    this.originName = originName;
-  }
-
-  public File getFile() {
-    return file;
-  }
-
-  public void setFile(File file) {
-    this.file = file;
-  }
-
-  public String getExt() {
-    return ext;
-  }
-
-  public void setExt(String ext) {
-    this.ext = ext;
-  }
-
-  public interface FileJsonView {
-  }
-
-  public interface WorkJsonView {
-  }
-
-
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }

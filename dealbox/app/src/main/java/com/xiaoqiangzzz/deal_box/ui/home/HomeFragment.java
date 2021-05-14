@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.xiaoqiangzzz.deal_box.R;
-import com.xiaoqiangzzz.deal_box.ui.goods.Goods;
+import com.xiaoqiangzzz.deal_box.ui.goods.GoodsActivity;
 import com.xiaoqiangzzz.deal_box.ui.issue_goods.IssueGoodsActivity;
 
 import java.util.ArrayList;
@@ -56,7 +56,7 @@ public class HomeFragment extends Fragment {
             public void onItemClick(View view, int position) {
 //                Toast.makeText(DashboardFragment.this.getContext(),"这是条目"
 //                        +DashboardFragment.this.chatListData.get(position),Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getActivity(), Goods.class);
+                Intent intent = new Intent(getActivity(), GoodsActivity.class);
                 intent.putExtra("id", HomeFragment.this.goodsListData.get(position));
                 startActivity(intent);
             }
