@@ -77,13 +77,13 @@ public class IssueGoodsImageListAdapter extends RecyclerView.Adapter<IssueGoodsI
     @Override
     public void onBindViewHolder(IssueGoodsImageListAdapter.ViewHolder holder, final int position) {
         // 绑定数据
-        if (mData.get(position) != null && !mData.get(position).equals("")) {
-            String urlString = BaseHttpService.BASE_URL + mData.get(position);
-            holder.imageView.setImageURI(Uri.parse(urlString));
-        }
-        //holder.mTv.setText(mData.get(position));
         if (position != this.mData.size() - 1) {
-            holder.imageView.setImageResource(R.drawable.goods2);
+            // 设置图片
+            if (mData.get(position) != null && !mData.get(position).equals("")) {
+                String urlString = BaseHttpService.BASE_URL + mData.get(position);
+                new DownloadImageTask(holder.imageView)
+                        .execute(urlString);
+            }
             //通过为条目设置点击事件触发回调
             if (mOnItemClickListener != null) {
                 holder.itemLayout.setOnClickListener(new View.OnClickListener() {
@@ -94,9 +94,7 @@ public class IssueGoodsImageListAdapter extends RecyclerView.Adapter<IssueGoodsI
                 });
             }
         } else {
-            holder.imageView.setImageResource(R.drawable.add);
-            holder.imageView.setBackgroundColor(Color.argb(255, 238, 238, 238));
-            holder.imageView.setPadding(130, 130, 130, 130);
+            holder.imageView.setImageResource(R.drawable.add_image);
 
             //通过为条目设置点击事件触发回调
             if (mOnItemClickListener != null) { 

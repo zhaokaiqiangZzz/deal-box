@@ -25,10 +25,9 @@
             android:textSize="16sp"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/iv_chat_imagr_right"
+            android:id="@+id/chat_item_right_image"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/head_image2"
             android:layout_alignParentRight="true"
             app:civ_border_color="@color/light"
             app:civ_border_width="2dp" />

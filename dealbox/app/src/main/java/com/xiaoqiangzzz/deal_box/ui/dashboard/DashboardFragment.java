@@ -13,19 +13,30 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.xiaoqiangzzz.deal_box.R;
-import com.xiaoqiangzzz.deal_box.ui.chat.Chat;
+import com.xiaoqiangzzz.deal_box.entity.Chat;
+import com.xiaoqiangzzz.deal_box.entity.Goods;
+import com.xiaoqiangzzz.deal_box.entity.User;
+import com.xiaoqiangzzz.deal_box.service.BaseHttpService;
+import com.xiaoqiangzzz.deal_box.service.ChatService;
+import com.xiaoqiangzzz.deal_box.service.UserService;
+import com.xiaoqiangzzz.deal_box.ui.chat.ChatActivity;
+import com.xiaoqiangzzz.deal_box.ui.home.GoodsListAdapter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class DashboardFragment extends Fragment {
 
     private DashboardViewModel dashboardViewModel;
-
+    private UserService userService = UserService.getInstance();
+    private ChatService chatService = ChatService.getInstance();
     private RecyclerView.LayoutManager chatListLayoutManager;
 
     private RecyclerView.Adapter chatListAdapter;
 
-    private ArrayList<String> chatListData;
+    private List<Chat> chats;
+    private User currentUser;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -39,8 +50,7 @@ public class DashboardFragment extends Fragment {
         chatListLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         chatListView.setLayoutManager(chatListLayoutManager);
 
-        this.chatListData = getData();
-        this.chatListAdapter = new ChatListAdapter(this.chatListData);
+        this.chatListAdapter = new ChatListAdapter(this.chats);
         ((ChatListAdapter) this.chatListAdapter).setOnItemClickListener(new ChatListAdapter.OnItemClickListener() {
 
             /**
@@ -50,24 +60,31 @@ public class DashboardFragment extends Fragment {
              */
             @Override
             public void onItemClick(View view, int position) {
-//                Toast.makeText(DashboardFragment.this.getContext(),"这是条目"
-//                        +DashboardFragment.this.chatListData.get(position),Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getActivity(), Chat.class);
-                intent.putExtra("id", DashboardFragment.this.chatListData.get(position));
+                Intent intent = new Intent(getActivity(), ChatActivity.class);
+                Long id = chats.get(position).getUsers().get(0).getId().equals(currentUser.getId()) ?
+                        chats.get(position).getUsers().get(1).getId() : chats.get(position).getUsers().get(0).getId();
+                intent.putExtra("id", id.toString());
                 startActivity(intent);
+            }
+        });
+
+        userService.getCurrentUser(new BaseHttpService.CallBack() {
+            @Override
+            public void onSuccess(BaseHttpService.HttpTask.CustomerResponse result) {
+                User user = (User) result.getData();
+
+                currentUser = user;
+            }
+        });
+        chatService.getAllByCurrentUser(new BaseHttpService.CallBack() {
+            @Override
+            public void onSuccess(BaseHttpService.HttpTask.CustomerResponse result) {
+                chats = new ArrayList<>(Arrays.asList((Chat[]) result.getData()));
+                ((ChatListAdapter) chatListAdapter).updateData(chats);
             }
         });
         chatListView.setAdapter(this.chatListAdapter);
         return view;
     }
 
-    private ArrayList<String> getData() {
-        ArrayList<String> data = new ArrayList<>();
-        String temp = " friend";
-        for(int i = 0; i < 20; i++) {
-            data.add(i + temp);
-        }
-
-        return data;
-    }
 }

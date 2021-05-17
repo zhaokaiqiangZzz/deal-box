@@ -7,16 +7,23 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.xiaoqiangzzz.deal_box.R;
+import com.xiaoqiangzzz.deal_box.entity.Chat;
+import com.xiaoqiangzzz.deal_box.entity.User;
+import com.xiaoqiangzzz.deal_box.service.BaseHttpService;
+import com.xiaoqiangzzz.deal_box.service.DownloadImageTask;
+import com.xiaoqiangzzz.deal_box.service.UserService;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHolder>{
 
-    private ArrayList<String> mData;
-
+    private List<Chat> mData;
     private OnItemClickListener mOnItemClickListener;
+    private UserService userService = UserService.getInstance();
+    private User currentUser;
 
     //设置回调接口
     public interface OnItemClickListener{
@@ -27,11 +34,14 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         this.mOnItemClickListener = mOnItemClickListener;
     }
 
-    public ChatListAdapter(ArrayList<String> data) {
+    public ChatListAdapter(List<Chat> data) {
+        userService.currentUser.subscribe((User user) -> {
+            this.currentUser = user;
+        });
         this.mData = data;
     }
 
-    public void updateData(ArrayList<String> data) {
+    public void updateData(List<Chat> data) {
         this.mData = data;
         notifyDataSetChanged();
     }
@@ -48,7 +58,16 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         // 绑定数据
-        holder.mTv.setText(mData.get(position));
+        User user = mData.get(position).getUsers().get(0).getId().equals(this.currentUser.getId()) ?
+                mData.get(position).getUsers().get(1) : mData.get(position).getUsers().get(0);
+        holder.mTv.setText(user.getPetName());
+
+        // 设置头像
+        if (user.getImageUrl() != null) {
+            String urlString = BaseHttpService.BASE_URL + user.getImageUrl();
+            new DownloadImageTask(holder.personImage)
+                    .execute(urlString);
+        }
 
         //通过为条目设置点击事件触发回调
         if (mOnItemClickListener != null) {
@@ -70,11 +89,13 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
 
         RelativeLayout itemLayout;
         TextView mTv;
+        CircleImageView personImage;
 
         public ViewHolder(View itemView) {
             super(itemView);
             mTv = (TextView) itemView.findViewById(R.id.friend_name);
             itemLayout = (RelativeLayout) itemView.findViewById(R.id.chat_card_relative_layout);
+            personImage = (CircleImageView) itemView.findViewById(R.id.chat_card_person_image);
         }
     }
 }

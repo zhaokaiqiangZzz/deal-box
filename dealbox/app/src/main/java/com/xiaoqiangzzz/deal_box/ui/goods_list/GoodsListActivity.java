@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.xiaoqiangzzz.deal_box.R;
+import com.xiaoqiangzzz.deal_box.entity.Goods;
 import com.xiaoqiangzzz.deal_box.entity.GoodsType;
 import com.xiaoqiangzzz.deal_box.ui.goods.GoodsActivity;
 import com.xiaoqiangzzz.deal_box.ui.home.GoodsListAdapter;
@@ -22,7 +23,7 @@ public class GoodsListActivity extends AppCompatActivity {
 
     private RecyclerView.Adapter goodsListAdapter;
 
-    private ArrayList<String> goodsListData;
+    private ArrayList<Goods> goodsListData = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +42,6 @@ public class GoodsListActivity extends AppCompatActivity {
         this.staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL);
         goodsListView.setLayoutManager(staggeredGridLayoutManager);
         // 设置adapter
-        this.goodsListData = getData();
         goodsListAdapter = new GoodsListAdapter(this.goodsListData);
         ((GoodsListAdapter) this.goodsListAdapter).setOnItemClickListener(new GoodsListAdapter.OnItemClickListener() {
 
@@ -55,7 +55,7 @@ public class GoodsListActivity extends AppCompatActivity {
 //                Toast.makeText(DashboardFragment.this.getContext(),"这是条目"
 //                        +DashboardFragment.this.chatListData.get(position),Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(GoodsListActivity.this, GoodsActivity.class);
-                intent.putExtra("id", GoodsListActivity.this.goodsListData.get(position));
+                intent.putExtra("id", GoodsListActivity.this.goodsListData.get(position).getId());
                 startActivity(intent);
             }
         });

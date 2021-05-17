@@ -24,21 +24,20 @@
             tools:ignore="MissingConstraints">
 
             <TextView
-                android:id="@+id/friend_name"
+                android:id="@+id/my_name"
                 style="@style/UsernameTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/person_image"
+                android:layout_toRightOf="@id/my_image"
                 android:gravity="center_vertical"
                 android:text="有马公生" />
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/person_image"
+                android:id="@+id/my_image"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_alignParentLeft="true"
-                android:src="@drawable/head_image2"
                 app:civ_border_color="@color/light"
                 app:civ_border_width="2dp" />
 
@@ -91,7 +90,7 @@
                         android:id="@+id/my_sold_image"
                         style="@style/my_deal_image"
                         android:layout_width="match_parent"
-                        android:src="@drawable/renminbi" />
+                        android:src="@drawable/money" />
 
                     <TextView
                         style="@style/recommendText"
@@ -124,6 +123,37 @@
 
                 </RelativeLayout>
 
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/visitor_image_container"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/light"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <TextView
+                style="@style/text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="头像"/>
+
+            <LinearLayout
+                android:id="@+id/user_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right">
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="24dp"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+                    android:gravity="center_horizontal|top" />
             </LinearLayout>
         </LinearLayout>
 

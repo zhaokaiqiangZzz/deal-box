@@ -27,7 +27,6 @@
                 android:id="@+id/issue_goods_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:srcCompat="@drawable/goods2"
                 android:scaleType="centerCrop"
                 android:contentDescription="商品图片"
                 />

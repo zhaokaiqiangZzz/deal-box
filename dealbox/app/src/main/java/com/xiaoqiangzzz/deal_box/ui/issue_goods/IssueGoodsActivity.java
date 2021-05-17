@@ -3,6 +3,7 @@ package com.xiaoqiangzzz.deal_box.ui.issue_goods;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -11,15 +12,23 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
+import com.xiaoqiangzzz.deal_box.MainActivity;
 import com.xiaoqiangzzz.deal_box.R;
 import com.xiaoqiangzzz.deal_box.entity.Attachment;
 import com.xiaoqiangzzz.deal_box.entity.Goods;
+import com.xiaoqiangzzz.deal_box.entity.User;
 import com.xiaoqiangzzz.deal_box.service.BaseHttpService;
 import com.xiaoqiangzzz.deal_box.service.GoodsService;
+import com.xiaoqiangzzz.deal_box.service.UserService;
+import com.xiaoqiangzzz.deal_box.ui.auth.LoginActivity;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -51,11 +60,6 @@ public class IssueGoodsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.issue_goods);
         this.issueGoodsImageView = findViewById(R.id.issue_goods_image);
-
-        // 设置发布图标颜色
-        Drawable addDrawable = getResources().getDrawable(R.drawable.add);
-        int color = Color.parseColor("#555555");
-        DrawableCompat.setTint(addDrawable, color);
 
         // 设置物品浏览瀑布列表
         RecyclerView goodsListView = findViewById(R.id.issue_goods_image_list);
@@ -102,6 +106,37 @@ public class IssueGoodsActivity extends Activity {
             }
         });
         goodsListView.setAdapter(this.issueGoodsImageList);
+
+        // 设置发布按钮方法
+        Button button = (Button)findViewById(R.id.submit_goods_button);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // 进行用户登陆
+                final String name = ((TextInputEditText) findViewById(R.id.issue_goods_name_input)).getText().toString();
+                final String description = ((EditText) findViewById(R.id.description_input)).getText().toString();
+                final String price = ((TextInputEditText) findViewById(R.id.issue_goods_price_input)).getText().toString();
+                goods.setName(name);
+                goods.setDescription(description);
+                goods.setPrice(Integer.parseInt(price));
+                goodsService.add(new BaseHttpService.CallBack() {
+                    @Override
+                    public void onSuccess(BaseHttpService.HttpTask.CustomerResponse result) {
+                        // 登陆成功
+                        if (result.getResponse().code() >= 200 && result.getResponse().code() < 300) {
+
+                            // 进入主页面
+                            Intent intent = new Intent(IssueGoodsActivity.this, MainActivity.class);
+                            startActivity(intent);
+                        } else {
+                            // 登陆失败 提示错误
+                            Snackbar.make(button, "用户名或密码错误!", Snackbar.LENGTH_SHORT)
+                                    .show();
+                        }
+                    }
+                }, goods);
+            }
+        });
     }
 
     private ArrayList<String> getData(Goods goods) {

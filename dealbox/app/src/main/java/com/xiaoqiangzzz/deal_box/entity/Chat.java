@@ -1,12 +1,12 @@
 package com.xiaoqiangzzz.deal_box.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Chat {
     private Long id;
-    private List<Message> messages;
-    private User  buyer;
-    private User seller;
+    private List<ChatMessage> chatMessages;
+    private List<User> users = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -16,27 +16,19 @@ public class Chat {
         this.id = id;
     }
 
-    public List<Message> getMessages() {
-        return messages;
+    public List<ChatMessage> getChatMessages() {
+        return chatMessages;
     }
 
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
+    public void setChatMessages(List<ChatMessage> chatMessages) {
+        this.chatMessages = chatMessages;
     }
 
-    public User getBuyer() {
-        return buyer;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setBuyer(User buyer) {
-        this.buyer = buyer;
-    }
-
-    public User getSeller() {
-        return seller;
-    }
-
-    public void setSeller(User seller) {
-        this.seller = seller;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }
