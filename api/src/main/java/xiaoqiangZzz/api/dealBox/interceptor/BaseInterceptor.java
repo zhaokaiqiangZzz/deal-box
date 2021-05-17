@@ -1,4 +1,4 @@
-package xiaoqiangZzz.api.dealBox;
+package xiaoqiangZzz.api.dealBox.interceptor;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -16,7 +16,8 @@ public class BaseInterceptor implements HandlerInterceptor {
     this.userService = userService;
   }
 
-  public boolean prHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+  @Override
+  public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
     // 从请求头获取token进行判断
     String token = request.getHeader("Authorization");
     if (token != null && !token.equals("")) {

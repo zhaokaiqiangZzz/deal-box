@@ -1,11 +1,15 @@
 package xiaoqiangZzz.api.dealBox.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Goods {
+  public static Integer STATUS_ISSUING = 0;
+  public static Integer STATUS_SOLD = 1;
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -14,16 +18,20 @@ public class Goods {
 
   private String description;
 
+  private int price;
+
   @OneToMany
   private List<Attachment> attachments = new ArrayList<>();
 
   @OneToOne
+  @JsonView(CreateUserJsonView.class)
   private User createUser;
 
   @OneToOne
+  @JsonView(BuyUserJsonView.class)
   private User buyUser;
 
-  private Integer status;
+  private Integer status = STATUS_ISSUING;
 
   public Long getId() {
     return id;
@@ -79,5 +87,18 @@ public class Goods {
 
   public void setStatus(Integer status) {
     this.status = status;
+  }
+
+  public int getPrice() {
+    return price;
+  }
+
+  public void setPrice(int price) {
+    this.price = price;
+  }
+
+  public interface CreateUserJsonView {
+  }
+  public interface BuyUserJsonView {
   }
 }
