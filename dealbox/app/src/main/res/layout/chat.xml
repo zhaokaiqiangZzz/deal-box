@@ -79,7 +79,7 @@
             android:layout_centerVertical="true"
             android:layout_toStartOf="@+id/send_message_button"
             android:background="@android:color/transparent"
-            android:hint="Enter Message"
+            android:hint="请输入内容"
             android:inputType="text"
             android:maxLines="6"
             tools:ignore="Autofill"
@@ -92,7 +92,7 @@
             android:layout_height="48dp"
             android:layout_alignParentEnd="true"
             android:background="?attr/selectableItemBackground"
-            android:text="Send"
+            android:text="发送"
             android:textColor="@color/colorPrimary"
             android:layout_alignParentRight="true" />
 

@@ -22,7 +22,7 @@
         android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="username">
+        android:hint="手机号">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -37,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:endIconMode="password_toggle"
-        android:hint="password">
+        android:hint="密码">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"

@@ -11,6 +11,7 @@ public class User {
     private String username;
     private String password;
     private String petName;
+    private String imageUrl;
 
     public User(){
 
@@ -62,5 +63,13 @@ public class User {
 
     public void setPetName(String petName) {
         this.petName = petName;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

@@ -27,7 +27,7 @@ import java.io.IOException;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private final UserService userService = new UserService();
+    private final UserService userService = UserService.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

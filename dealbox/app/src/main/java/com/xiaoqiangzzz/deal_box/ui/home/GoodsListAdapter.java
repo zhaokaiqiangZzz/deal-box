@@ -1,17 +1,16 @@
 package com.xiaoqiangzzz.deal_box.ui.home;
 
-import android.graphics.drawable.Drawable;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.xiaoqiangzzz.deal_box.R;
-import com.xiaoqiangzzz.deal_box.ui.dashboard.ChatListAdapter;
+import com.xiaoqiangzzz.deal_box.entity.Goods;
+import com.xiaoqiangzzz.deal_box.service.BaseHttpService;
+import com.xiaoqiangzzz.deal_box.service.DownloadImageTask;
 
 import java.util.ArrayList;
 
@@ -22,7 +21,7 @@ public class GoodsListAdapter extends RecyclerView.Adapter<GoodsListAdapter.View
     /**
      * 展示数据
      */
-    private ArrayList<String> mData;
+    private ArrayList<Goods> mData;
 
     private GoodsListAdapter.OnItemClickListener mOnItemClickListener;
 
@@ -35,11 +34,11 @@ public class GoodsListAdapter extends RecyclerView.Adapter<GoodsListAdapter.View
         void onItemClick(View view, int position);
     }
 
-    public GoodsListAdapter(ArrayList<String> data) {
+    public GoodsListAdapter(ArrayList<Goods> data) {
         this.mData = data;
     }
-
-    public void updateData(ArrayList<String> data) {
+                                                                                                           
+    public void updateData(ArrayList<Goods> data) {
         this.mData = data;
         notifyDataSetChanged();
     }
@@ -61,17 +60,25 @@ public class GoodsListAdapter extends RecyclerView.Adapter<GoodsListAdapter.View
         }
         // 实例化viewholder
         ViewHolder viewHolder = new ViewHolder(v);
+
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(GoodsListAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(GoodsListAdapter.ViewHolder viewHolder, final int position) {
         // 绑定数据
-        //holder.mTv.setText(mData.get(position));
-        holder.imageView.setImageResource(R.drawable.goods2);
+        // 设置图片
+        if (mData.get(position).getAttachments().get(0).getUrl() != null && !mData.get(position).getAttachments().get(0).getUrl().equals("")) {
+            String urlString = BaseHttpService.BASE_URL + mData.get(position).getAttachments().get(0).getUrl();
+            new DownloadImageTask(viewHolder.imageView)
+                    .execute(urlString);
+        }
+        // 设置名称价格
+        viewHolder.nameText.setText(mData.get(position).getName());
+        viewHolder.priceText.setText("￥" + mData.get(position).getPrice());
         //通过为条目设置点击事件触发回调
         if (mOnItemClickListener != null) {
-            holder.itemLayout.setOnClickListener(new View.OnClickListener() {
+            viewHolder.itemLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     mOnItemClickListener.onItemClick(view, position);
@@ -87,12 +94,14 @@ public class GoodsListAdapter extends RecyclerView.Adapter<GoodsListAdapter.View
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         LinearLayout itemLayout;
-        TextView mTv;
+        TextView nameText;
+        TextView priceText;
         ImageView imageView;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mTv = (TextView) itemView.findViewById(R.id.goods_name);
+            nameText = (TextView) itemView.findViewById(R.id.goods_name);
+            priceText = (TextView) itemView.findViewById(R.id.goods_price);
             itemLayout = (LinearLayout) itemView.findViewById(R.id.goods_card);
             imageView = itemView.findViewById(R.id.item_goods_image);
         }

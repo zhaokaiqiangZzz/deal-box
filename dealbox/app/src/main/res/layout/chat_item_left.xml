@@ -12,16 +12,15 @@
         android:orientation="horizontal">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/person_image"
+            android:id="@+id/chat_item_left_image"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/head_image"
             android:layout_alignParentLeft="true"
             app:civ_border_color="@color/light"
             app:civ_border_width="2dp" />
 
         <TextView
-            android:id="@+id/tvname"
+            android:id="@+id/chat_other_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"

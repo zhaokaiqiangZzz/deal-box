@@ -15,27 +15,31 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.xiaoqiangzzz.deal_box.R;
+import com.xiaoqiangzzz.deal_box.entity.Goods;
+import com.xiaoqiangzzz.deal_box.service.BaseHttpService;
+import com.xiaoqiangzzz.deal_box.service.GoodsService;
 import com.xiaoqiangzzz.deal_box.ui.goods.GoodsActivity;
 import com.xiaoqiangzzz.deal_box.ui.issue_goods.IssueGoodsActivity;
+import com.xiaoqiangzzz.deal_box.ui.issue_goods.IssueGoodsImageListAdapter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
-
     private StaggeredGridLayoutManager staggeredGridLayoutManager;
-
     private RecyclerView.Adapter goodsListAdapter;
-
-    private ArrayList<String> goodsListData;
+    private GoodsService goodsService = GoodsService.getInstance();
+    private ArrayList<Goods> goods = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        view.setPadding(0,0,0, 50);
+        view.setPadding(0, 0, 0, 50);
 
         // 设置物品浏览瀑布列表
         RecyclerView goodsListView = view.findViewById(R.id.goods_cards_list);
@@ -43,9 +47,9 @@ public class HomeFragment extends Fragment {
         this.staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL);
         goodsListView.setLayoutManager(staggeredGridLayoutManager);
         // 设置adapter
-        this.goodsListData = getData();
-        goodsListAdapter = new GoodsListAdapter(this.goodsListData);
-        ((GoodsListAdapter) this.goodsListAdapter).setOnItemClickListener(new GoodsListAdapter.OnItemClickListener() {
+        goodsListAdapter = new GoodsListAdapter(this.goods);
+        goodsListView.setAdapter(this.goodsListAdapter);
+        ((GoodsListAdapter) goodsListAdapter).setOnItemClickListener(new GoodsListAdapter.OnItemClickListener() {
 
             /**
              * 设置点击条目触发方法
@@ -54,35 +58,30 @@ public class HomeFragment extends Fragment {
              */
             @Override
             public void onItemClick(View view, int position) {
-//                Toast.makeText(DashboardFragment.this.getContext(),"这是条目"
-//                        +DashboardFragment.this.chatListData.get(position),Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getActivity(), GoodsActivity.class);
-                intent.putExtra("id", HomeFragment.this.goodsListData.get(position));
+                intent.putExtra("id", goods.get(position).getId().toString());
                 startActivity(intent);
             }
         });
-        goodsListView.setAdapter(this.goodsListAdapter);
+
+        goodsService.getAll(new BaseHttpService.CallBack() {
+            @Override
+            public void onSuccess(BaseHttpService.HttpTask.CustomerResponse result) {
+                goods = new ArrayList<>(Arrays.asList((Goods[]) result.getData()));
+                ((GoodsListAdapter) goodsListAdapter).updateData(goods);
+            }
+        });
 
         // 设置发布物品按钮
         FloatingActionButton floatingActionButton = view.findViewById(R.id.issue_goods_button);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 // 给bnt1添加点击响应事件
-                Intent intent =new Intent(getActivity(), IssueGoodsActivity.class);
+                Intent intent = new Intent(getActivity(), IssueGoodsActivity.class);
                 //启动
                 startActivity(intent);
             }
         });
         return view;
-    }
-
-    private ArrayList<String> getData() {
-        ArrayList<String> data = new ArrayList<>();
-        String temp = "goods";
-        for(int i = 0; i < 20; i++) {
-            data.add(i + temp);
-        }
-
-        return data;
     }
 }

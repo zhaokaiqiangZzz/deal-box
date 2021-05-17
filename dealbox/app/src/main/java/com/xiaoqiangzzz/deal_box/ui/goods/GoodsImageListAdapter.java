@@ -3,22 +3,27 @@ package com.xiaoqiangzzz.deal_box.ui.goods;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.xiaoqiangzzz.deal_box.R;
+import com.xiaoqiangzzz.deal_box.entity.Attachment;
+import com.xiaoqiangzzz.deal_box.service.BaseHttpService;
+import com.xiaoqiangzzz.deal_box.service.DownloadImageTask;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 public class GoodsImageListAdapter extends RecyclerView.Adapter<GoodsImageListAdapter.ViewHolder>{
-    private ArrayList<String> mData;
+    private List<Attachment> mData;
 
-    public GoodsImageListAdapter(ArrayList<String> data) {
+    public GoodsImageListAdapter(List<Attachment> data) {
         this.mData = data;
     }
 
-    public void updateData(ArrayList<String> data) {
+    public void updateData(List<Attachment> data) {
         this.mData = data;
         notifyDataSetChanged();
     }
@@ -36,6 +41,12 @@ public class GoodsImageListAdapter extends RecyclerView.Adapter<GoodsImageListAd
     public void onBindViewHolder(GoodsImageListAdapter.ViewHolder holder, final int position) {
         // 绑定数据
 //        holder.mTv.setText(mData.get(position));
+        // 设置图片
+        if (mData.get(position).getUrl() != null && !mData.get(position).getUrl().equals("")) {
+            String urlString = BaseHttpService.BASE_URL + mData.get(position).getUrl();
+            new DownloadImageTask(holder.imageView)
+                    .execute(urlString);
+        }
     }
 
     @Override
@@ -45,11 +56,11 @@ public class GoodsImageListAdapter extends RecyclerView.Adapter<GoodsImageListAd
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView mTv;
+        ImageView imageView;
 
         public ViewHolder(View itemView) {
             super(itemView);
-//            mTv = (TextView) itemView.findViewById(R.id.friend_name);
+            imageView = (ImageView) itemView.findViewById(R.id.goods_image);
         }
     }
 }

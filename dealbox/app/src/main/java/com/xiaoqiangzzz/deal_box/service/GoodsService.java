@@ -19,6 +19,18 @@ public class GoodsService {
     }
 
     public void uploadImage(RequestBody data, BaseHttpService.CallBack callBack) {
-        httpService.putByForm( "attachment/uploadImage", data, callBack, Attachment.class);
+        httpService.putByForm( LOCAL_URL + "attachment/uploadImage", data, callBack, Attachment.class);
+    }
+
+    public void add(BaseHttpService.CallBack callBack, Goods goods) {
+        httpService.post(LOCAL_URL + "goods/add", goods, callBack, Goods.class);
+    }
+
+    public void getAll(BaseHttpService.CallBack callBack) {
+        httpService.get(LOCAL_URL + "goods/getAll", callBack, Goods[].class);
+    }
+
+    public void getById(BaseHttpService.CallBack callBack, Long id) {
+        httpService.get(LOCAL_URL + "goods/getById/" + id.toString(), callBack, Goods.class);
     }
 }
