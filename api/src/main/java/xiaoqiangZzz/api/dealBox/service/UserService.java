@@ -1,15 +1,11 @@
 package xiaoqiangZzz.api.dealBox.service;
 
+import org.springframework.web.multipart.MultipartFile;
 import xiaoqiangZzz.api.dealBox.entity.User;
-import xiaoqiangZzz.api.dealBox.vo.BindingUser;
-import xiaoqiangZzz.api.dealBox.vo.StatusUser;
-import xiaoqiangZzz.api.dealBox.vo.PasswordUser;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.ValidationException;
-import java.util.List;
-import java.util.Optional;
 
 public interface UserService {
 
@@ -38,4 +34,6 @@ public interface UserService {
   void updatePassword(String password, String newPassword) throws ValidationException;
 
   User login(String username, String password, HttpServletResponse response);
+
+  String changeImage(MultipartFile file, User user);
 }

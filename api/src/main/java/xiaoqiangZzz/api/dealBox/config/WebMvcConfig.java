@@ -2,7 +2,6 @@ package xiaoqiangZzz.api.dealBox.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
@@ -10,8 +9,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import xiaoqiangZzz.api.dealBox.BaseInterceptor;
-import xiaoqiangZzz.api.dealBox.entity.User;
+import xiaoqiangZzz.api.dealBox.interceptor.BaseInterceptor;
 
 import java.util.List;
 

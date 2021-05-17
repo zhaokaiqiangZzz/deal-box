@@ -1,5 +1,7 @@
 package xiaoqiangZzz.api.dealBox.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +13,12 @@ public class Chat {
   private Long id;
 
   @OneToMany
-  private List<Message> messages = new ArrayList<>();
+  @JsonView(ChatMessagesJsonView.class)
+  private List<ChatMessage> chatMessages = new ArrayList<>();
 
-  @OneToOne
-  private User buyUser;
-
-  @OneToOne
-  private User sellUser;
+  @ManyToMany
+  @JsonView(UsersJsonView.class)
+  private List<User> users = new ArrayList<>();
 
   public Long getId() {
     return id;
@@ -27,27 +28,25 @@ public class Chat {
     this.id = id;
   }
 
-  public List<Message> getMessages() {
-    return messages;
+  public List<ChatMessage> getChatMessages() {
+    return chatMessages;
   }
 
-  public void setMessages(List<Message> messages) {
-    this.messages = messages;
+  public void setChatMessages(List<ChatMessage> chatMessages) {
+    this.chatMessages = chatMessages;
   }
 
-  public User getBuyUser() {
-    return buyUser;
+  public List<User> getUsers() {
+    return users;
   }
 
-  public void setBuyUser(User buyUser) {
-    this.buyUser = buyUser;
+  public void setUsers(List<User> users) {
+    this.users = users;
   }
 
-  public User getSellUser() {
-    return sellUser;
+  public interface UsersJsonView {
   }
 
-  public void setSellUser(User sellUser) {
-    this.sellUser = sellUser;
+  public interface ChatMessagesJsonView {
   }
 }

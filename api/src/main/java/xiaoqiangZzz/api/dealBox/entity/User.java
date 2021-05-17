@@ -27,17 +27,14 @@ public class User extends BaseEntity {
   private String password;
 
   @OneToMany
+  @JsonView(GoodsJsonVIew.class)
   private List<Goods> goods;
 
-  @OneToMany
+  @ManyToMany
+  @JsonView(ChatsJsonView.class)
   private List<Chat> chats;
 
-  /**
-   * 状态：
-   * 0 冻结中
-   * 1 正常.
-   */
-  private Integer status = User.STATUS_NORMAL;
+  private String imageUrl;
 
   public String getPetName() {
     return petName;
@@ -58,14 +55,6 @@ public class User extends BaseEntity {
 
   public void setPassword(String password) {
     this.password = password;
-  }
-
-  public Integer getStatus() {
-    return status;
-  }
-
-  public void setStatus(Integer status) {
-    this.status = status;
   }
 
   public String getUsername() {
@@ -92,10 +81,20 @@ public class User extends BaseEntity {
     this.chats = chats;
   }
 
+  public String getImageUrl() {
+    return imageUrl;
+  }
+
+  public void setImageUrl(String imageUrl) {
+    this.imageUrl = imageUrl;
+  }
+
   public interface PasswordJsonView {
   }
 
+  public interface ChatsJsonView {
+  }
 
-  public interface RolesJsonView {
+  public interface GoodsJsonVIew {
   }
 }

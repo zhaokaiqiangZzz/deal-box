@@ -1,6 +1,7 @@
 package xiaoqiangZzz.api.dealBox.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.multipart.MultipartFile;
 import xiaoqiangZzz.api.dealBox.NotAuthenticationException;
 import xiaoqiangZzz.api.dealBox.entity.User;
 import xiaoqiangZzz.api.dealBox.repository.UserRepository;
@@ -21,6 +22,9 @@ public class UserServiceImpl implements UserService {
 
   @Autowired
   HttpServletRequest request;
+
+  @Autowired
+  CommonService commonService;
 
   public UserServiceImpl(UserRepository userRepository) {
     this.userRepository = userRepository;
@@ -54,6 +58,14 @@ public class UserServiceImpl implements UserService {
     String token = CommonService.createJwtToken(user.getId());
     response.setHeader(UserService.tokenHeader, token);
     return user;
+  }
+
+  @Override
+  public String changeImage(MultipartFile file, User user) {
+    String imageUrl = commonService.uploadImage(file);
+    user.setImageUrl(imageUrl);
+    userRepository.save(user);
+    return imageUrl;
   }
 
   @Override

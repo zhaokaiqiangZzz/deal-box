@@ -18,8 +18,8 @@ public class InitData {
 
   private UserRepository userRepository;
 
-  private String systemAdminUsername = "15713301902";
-  private String systemAdminPassword = "123456";
+  private String Username = "15713301902";
+  private String Password = "123456";
 
 
   public InitData(UserRepository userRepository) {
@@ -35,10 +35,16 @@ public class InitData {
       return;
     }
 
-    User systemAdmin = new User();
-    systemAdmin.setStatus(User.STATUS_NORMAL);
-    systemAdmin.setUsername(this.systemAdminUsername);
-    systemAdmin.setPassword(this.systemAdminPassword);
-    this.userRepository.save(systemAdmin);
+    User user1 = new User();
+    user1.setUsername(this.Username);
+    user1.setPassword(this.Password);
+    user1.setPetName("小强1号");
+    users.add(user1);
+    User user2 = new User();
+    user2.setUsername("13900000000");
+    user2.setPassword(this.Password);
+    user2.setPetName("小强2号");
+    users.add(user2);
+    this.userRepository.saveAll(users);
   }
 }
